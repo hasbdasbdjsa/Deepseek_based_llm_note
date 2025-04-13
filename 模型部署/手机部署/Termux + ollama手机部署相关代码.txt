@@ -1,0 +1,32 @@
+# 先来安装proot-distro
+pkg install proot-distro
+
+# 使用proot-distro安装一个debian
+proot-distro install debian
+
+# 安装成功后通过login命令就直接进入debian
+proot-distro login debian
+
+# 进入之后再来安装ollama
+curl -fsSL https://ollama.com/install.sh | sh
+
+# 安装完毕可以查看ollama版本进行验证
+ollama -v
+
+# 出现版本号之后就可以使用ollama
+# 开启ollama服务
+ollama serve
+# 此时这个命令行的窗口不要关闭，关闭之后ollama服务就停止了
+
+:'
+启动ollama服务后当前会话会被占用
+从左上方屏幕边缘向右滑动打开侧边栏
+并点击“NEW SESSION”打开一个新会话
+这样就可以使用ollama的其他命令了
+'
+
+# 在新的会话中先进入debian
+proot-distro login debian
+
+# 下载并运行大模型 --verbose用于显示性能信息
+ollama run --verbose deepseek-r1:1.5b
